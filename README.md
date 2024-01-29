@@ -27,11 +27,18 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
+| Column             | Type       | Options                   |
+| ------------------ | ---------- | --------------------------|
+| nickname           | string     | null: false               |
+| email              | string     | null: false, unique: true |
+| encrypted_password | string     | null: false               |
+| first_name         | string     | null: false               |
+| last_name          | string     | null: false               |
+| first_name_kana    | string     | null: false               |
+| last_name_kana     | string     | null: false               |
+| birth_year         | integer    | null: false               |
+| birth_month        | integer    | null: false               |
+| birth_day          | integer    | null: false               |
 
 ### Association
 
@@ -40,10 +47,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column            | Type   | Options     |
-| ----------------- | ------ | ----------- |
-| items_name        | string | null: false |
-| items_description | string | null: false |
+| Column                 | Type       | Options                        |
+| -----------------      | ------     | -----------                    |
+| user                   | references | null: false, foreign_key: true |
+| item-name              | string     | null: false                    |
+| item-description       | text       | null: false                    |
+| item-category_id       | integer    | null: false                    |
+| item-condition_id      | integer    | null: false                    |
+| burden-of-shipping_id  | integer    | null: false                    |
+| ship-from-address_id   | integer    | null: false                    |
+| delivery-time_id       | integer    | null: false                    |
+| item-price             | string     | null: false                    |
 
 
 ### Association
@@ -53,13 +67,10 @@ Things you may want to cover:
 
 ## purchases テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| first_name         | references | null: false, foreign_key: true |
-| last_name          | references | null: false, foreign_key: true |
-| first_name_kana    | references | null: false, foreign_key: true |
-| last_name_kana     | references | null: false, foreign_key: true |
-| items_name         | references | null: false, foreign_key: true |
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -72,9 +83,10 @@ Things you may want to cover:
 | Column         | Type       | Options     |
 | -------------- | ---------- | ----------- |
 | post_code      | string     | null: false |
+| prefectures_id | integer    | null: false |
 | municipalities | string     | null: false |
 | block          | string     | null: false |
-| building_name  | string     | null: false |
+| building_name  | string     |             |
 | phone_number   | string     | null: false |
 
 ### Association
