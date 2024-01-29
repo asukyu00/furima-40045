@@ -36,9 +36,7 @@ Things you may want to cover:
 | last_name          | string     | null: false               |
 | first_name_kana    | string     | null: false               |
 | last_name_kana     | string     | null: false               |
-| birth_year         | integer    | null: false               |
-| birth_month        | integer    | null: false               |
-| birth_day          | integer    | null: false               |
+| birth_day          | date       | null: false               |
 
 ### Association
 
@@ -48,16 +46,16 @@ Things you may want to cover:
 ## items テーブル
 
 | Column                 | Type       | Options                        |
-| -----------------      | ------     | -----------                    |
+| -----------------      | ------     | ------------------------------ |
 | user                   | references | null: false, foreign_key: true |
-| item-name              | string     | null: false                    |
-| item-description       | text       | null: false                    |
-| item-category_id       | integer    | null: false                    |
-| item-condition_id      | integer    | null: false                    |
-| burden-of-shipping_id  | integer    | null: false                    |
-| ship-from-address_id   | integer    | null: false                    |
-| delivery-time_id       | integer    | null: false                    |
-| item-price             | string     | null: false                    |
+| item_name              | string     | null: false                    |
+| item_description       | text       | null: false                    |
+| item_category_id       | integer    | null: false                    |
+| item_condition_id      | integer    | null: false                    |
+| burden_of_shipping_id  | integer    | null: false                    |
+| prefectures_id         | integer    | null: false                    |
+| delivery_time_id       | integer    | null: false                    |
+| item_price             | integer    | null: false                    |
 
 
 ### Association
@@ -76,18 +74,19 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping
+- has_one    :shipping
 
 ## shippings テーブル
 
-| Column         | Type       | Options     |
-| -------------- | ---------- | ----------- |
-| post_code      | string     | null: false |
-| prefectures_id | integer    | null: false |
-| municipalities | string     | null: false |
-| block          | string     | null: false |
-| building_name  | string     |             |
-| phone_number   | string     | null: false |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| purchase       | references | null: false, foreign_key: true |
+| post_code      | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| municipalities | string     | null: false                    |
+| block          | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
 
 ### Association
 
