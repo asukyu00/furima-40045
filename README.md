@@ -53,7 +53,7 @@ Things you may want to cover:
 | item_category_id       | integer    | null: false                    |
 | item_condition_id      | integer    | null: false                    |
 | burden_of_shipping_id  | integer    | null: false                    |
-| prefectures_id         | integer    | null: false                    |
+| prefecture_id          | integer    | null: false                    |
 | delivery_time_id       | integer    | null: false                    |
 | item_price             | integer    | null: false                    |
 
@@ -82,7 +82,7 @@ Things you may want to cover:
 | -------------- | ---------- | ------------------------------ |
 | purchase       | references | null: false, foreign_key: true |
 | post_code      | string     | null: false                    |
-| prefectures_id | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | municipalities | string     | null: false                    |
 | block          | string     | null: false                    |
 | building_name  | string     |                                |
