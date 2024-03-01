@@ -12,10 +12,8 @@ class ItemsController < ApplicationController
   #   redirect_to '/'
   # end
 
-
   # private
   # def items_params
   #   params.require(:item).permit()
   # end
-
 end
