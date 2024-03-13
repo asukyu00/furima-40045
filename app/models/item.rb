@@ -9,7 +9,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
 
-  validates :item_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :item_price, numericality: { only_integer:true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
   with_options numericality: { other_than: 1 } do
     validates :prefecture_id
@@ -20,7 +20,6 @@ class Item < ApplicationRecord
   end
 
   with_options presence: true do
-    validates :user
     validates :item_name
     validates :item_description
     validates :item_category_id
