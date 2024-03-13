@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
   belongs_to :category
@@ -10,7 +9,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
 
-  validates :item_price, :numericality => { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999}
+  validates :item_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
   with_options numericality: { other_than: 1 } do
     validates :prefecture_id
@@ -18,7 +17,7 @@ class Item < ApplicationRecord
     validates :item_condition_id
     validates :burden_of_shipping_id
     validates :delivery_time_id
-  end  
+  end
 
   with_options presence: true do
     validates :user
@@ -32,5 +31,4 @@ class Item < ApplicationRecord
     validates :item_price
     validates :image
   end
-
 end
