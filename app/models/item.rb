@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :category
   belongs_to :condition
+  belongs_to :shipping_costs
 
   belongs_to :user
   has_one_attached :image
@@ -12,6 +13,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :item_category_id
     validates :item_condition_id
+    validates :burden_of_shipping_id
   end  
 
   with_options presence: true do
@@ -21,8 +23,8 @@ class Item < ApplicationRecord
     # validates :item_category_id
     # validates :item_condition_id
     # validates :burden_of_shipping_id
-    validates :prefecture_id
-    validates :delivery_time_id
+    # validates :prefecture_id
+    # validates :delivery_time_id
     # validates :item_price 
   end
 
