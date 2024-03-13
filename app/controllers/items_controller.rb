@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new,
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
+    @items = Item.all
   end
 
   def new
@@ -13,6 +14,7 @@ class ItemsController < ApplicationController
     if @item.save 
       redirect_to root_path
     else
+      Rails.logger.error @item.errors.full_messages
       render :new
     end
   end
@@ -20,6 +22,6 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:item_name, :item_description, :item_category_id, :item_condition_id,
-    :burden_of_shipping_id, :prefecture_id, :delivery_time_id, :item_price, :image ).merge(user_id: current_user_id)
+    :burden_of_shipping_id, :prefecture_id, :delivery_time_id, :item_price, :image ).merge(user_id: current_user.id)
   end
 end
