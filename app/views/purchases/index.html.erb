@@ -35,6 +35,8 @@
 
     <%= render 'shared/error_messages', model: f.object %>
 
+    <%= include_gon %>
+
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
@@ -45,7 +47,7 @@
           <label class="form-text">カード情報</label>
           <span class="indispensable">必須</span>
         </div>
-        
+
         <div id="number-form" class="input-default"></div>
         <div class='available-card'>
           <%= image_tag 'card-visa.gif', class: 'card-logo'%>
