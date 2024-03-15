@@ -13,7 +13,7 @@ class PurchasesController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new(purchase_params)
-    if @purchase_shipping.valid?
+      pay_item
       @purchase_shipping.save
       redirect_to root_path
     else
@@ -33,6 +33,15 @@ class PurchasesController < ApplicationController
 
   def move_to_index
     redirect_to root_path if current_user.id == @item.user_id || @item.buyer.present?
+  end
+
+  def pay_item
+    Payjp.api_key = "sk_test_6bc930afdede9794831c076e"  
+    Payjp::Charge.create(
+      amount: order_params[:price],  # 商品の値段
+      card: order_params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
   end
 
 end
