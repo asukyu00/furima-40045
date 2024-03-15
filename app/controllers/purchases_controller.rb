@@ -8,12 +8,13 @@ class PurchasesController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new(purchase_params)
     if @purchase_shipping.valid?
       @purchase_shipping.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
