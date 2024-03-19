@@ -24,7 +24,7 @@ class PurchasesController < ApplicationController
 
   def purchase_params
     params.require(:purchase_shipping).permit(:post_code, :prefecture_id, :municipalities, :block, :building,
-                                              :phone_number).merge(user_id: current_user.id, token: params[:token])
+                                              :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def set_item
