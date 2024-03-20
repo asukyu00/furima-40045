@@ -5,7 +5,7 @@ RSpec.describe PurchaseShipping, type: :model do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
     @purchase_shipping = FactoryBot.build(:purchase_shipping, user_id: user.id, item_id: item.id)
-    sleep 0.1 
+    sleep 0.1
   end
 
   describe '商品購入情報の保存' do
@@ -53,37 +53,52 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'post_codeはハイフンがないと保存できない' do
         @purchase_shipping.post_code = '1234567'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_shipping.errors.full_messages).to include('Post code is invalid')
       end
       it 'post_codeは半角英数混合では保存できない' do
         @purchase_shipping.post_code = '123-abcd'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Post code is invalid")
-      end    
+        expect(@purchase_shipping.errors.full_messages).to include('Post code is invalid')
+      end
       it 'post_codeは全角では保存できない' do
         @purchase_shipping.post_code = '１２３-４５６７'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_shipping.errors.full_messages).to include('Post code is invalid')
       end
       it 'prefecture_idは選択していないと保存できない' do
         @purchase_shipping.prefecture_id = 1
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@purchase_shipping.errors.full_messages).to include('Prefecture must be other than 1')
       end
-      it 'phone_numberは12桁の数字では保存できない' do
+      it 'phone_numberは9桁以下の数字では保存できない' do
+        @purchase_shipping.phone_number = '090123456'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberは12桁以上の数字では保存できない' do
         @purchase_shipping.phone_number = '090123456789'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは半角英数混合では保存できない' do
         @purchase_shipping.phone_number = 'abc123456789'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは全角では保存できない' do
         @purchase_shipping.phone_number = '０９０１２３４５６７８'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'user_id（購入者）が空だと保存できない' do
+        @purchase_shipping.user_id = ' '
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_id（購入商品）が空だと保存できない' do
+        @purchase_shipping.item_id = ' '
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
