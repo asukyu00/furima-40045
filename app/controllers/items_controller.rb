@@ -51,9 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
-  end
+    return if current_user.id == @item.user_id && @item.purchase.nil?
 
+    redirect_to action: :index
+  end
 end
